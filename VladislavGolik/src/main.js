@@ -7,16 +7,17 @@ const massages = [
     {name: "Ivan", content: ": Two dozen white roses."},
 ];
 
-const Massage = (props) => {
-return <li><strong>{props.name}</strong>{props.content}</li>
-}
+const Massage = ({name, content}) => <li><strong>{name}</strong>{content}</li>
 
-const MassageList = (props) => {
+const MassageList = ({massages}) => {
     return (
         <ul>
-        {props.massages.map(item => <Massage {...item} />)}
+        {massages.map((item, index) => <Massage {...item} key={index} />)}
         </ul>
     );
 }
 
-ReactDOM.render(<MassageList massages={massages} />, document.getElementById("root"));
+ReactDOM.render(
+    <MassageList massages={massages} />,
+    document.getElementById("root")
+);
