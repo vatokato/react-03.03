@@ -1,26 +1,26 @@
-const path = require("path");
-const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: {
-        app: './index.js',
-    },
-    context: path.resolve(__dirname, "app_src"),
+    entry: path.resolve(__dirname, "app_src", "index.js"),
     output: {
-        path: path.resolve(__dirname, "app", "build"),
-        filename: 'app.js',
+        path: path.resolve(__dirname, "app"),
+        filename: 'index.js'
     },
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                include: path.resolve(__dirname, "app_src"),
+                include: path.resolve(__dirname, 'app_src'),
                 loader: 'babel-loader',
-                exclude: /node_modules/,
+                exclude: '/node_modules/',
                 options: {
-                    presets: ['@babel/env', '@babel/react'],
+                    presets: ['@babel/env', '@babel/react']
                 }
-            },
-        ],
+            }
+        ]
     },
+    plugins: [
+        new HtmlWebpackPlugin({template: './index.html'})
+    ]
 };
