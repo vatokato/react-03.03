@@ -5,9 +5,13 @@ import ReactDOM from "react-dom";
 
 // const Link = () =>  React.createElement("a", {href: "https://ya.ru"}, "Yandex");
 
-function Link(props) {
-    return React.createElement("a", {href: `https://${props.to}`}, props.to.toLocaleUpperCase());
-}
+// function Link(props) {
+//     return React.createElement("a", {href: `https://${props.to}`}, props.to.toLocaleUpperCase());
+// }
 
+function Link(props) {
+
+return <a href={"https://" + props.to}>{props.to.toLocaleUpperCase()}</a>
+}
 
 ReactDOM.render(React.createElement(Link, {to: "ya.ru"}), document.getElementById("root"));
