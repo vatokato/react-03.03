@@ -4,7 +4,9 @@
   "description": "ReactJS • 03.03.2020 MSK (UTC+3)\r ===",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --mode development --open",
+    "bil": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +14,7 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.6",
     "@babel/preset-env": "^7.8.6",
+    "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",

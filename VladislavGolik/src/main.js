@@ -1,0 +1,13 @@
+import React from "react";
+import ReactDOM from "react-dom";
+
+// const element = React.createElement("a", {href: "https://ya.ru"}, "Yandex.ru");
+
+// const Link = () =>  React.createElement("a", {href: "https://ya.ru"}, "Yandex");
+
+function Link(props) {
+    return React.createElement("a", {href: `https://${props.to}`}, props.to.toLocaleUpperCase());
+}
+
+
+ReactDOM.render(React.createElement(Link, {to: "ya.ru"}), document.getElementById("root"));
