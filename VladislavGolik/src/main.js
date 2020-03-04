@@ -1,17 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-// const element = React.createElement("a", {href: "https://ya.ru"}, "Yandex.ru");
+const massages = [
+    {name: "Ivan", content: ": Good evening! I’d like to send some flowers to my girlfriend, please."},
+    {name: "Lena", content: ": Of course. What do you have in mind?"},
+    {name: "Ivan", content: ": Two dozen white roses."},
+];
 
-// const Link = () =>  React.createElement("a", {href: "https://ya.ru"}, "Yandex");
-
-// function Link(props) {
-//     return React.createElement("a", {href: `https://${props.to}`}, props.to.toLocaleUpperCase());
-// }
-
-function Link(props) {
-
-return <a href={"https://" + props.to}>{props.to.toLocaleUpperCase()}</a>
+const Massage = (props) => {
+return <li><strong>{props.name}</strong>{props.content}</li>
 }
 
-ReactDOM.render(<Link to="ya.ru"/>, document.getElementById("root"));
+const MassageList = (props) => {
+    return (
+        <ul>
+        {props.massages.map(item => Massage(item))}
+        </ul>
+    );
+}
+
+ReactDOM.render(<MassageList massages={massages} />, document.getElementById("root"));
