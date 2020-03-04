@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: path.resolve(__dirname, "app_src", "index.js"),
+    entry: path.resolve(__dirname, "components", "index.js"),
     output: {
         path: path.resolve(__dirname, "app"),
         filename: 'index.js'
@@ -11,7 +11,7 @@ module.exports = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                include: path.resolve(__dirname, 'app_src'),
+                include: path.resolve(__dirname, 'components'),
                 loader: 'babel-loader',
                 exclude: '/node_modules/',
                 options: {

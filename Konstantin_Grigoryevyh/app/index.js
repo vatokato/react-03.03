@@ -81,44 +81,44 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./app_src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./components/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./app_src/index.js":
-/*!**************************!*\
-  !*** ./app_src/index.js ***!
-  \**************************/
+/***/ "./components/index.js":
+/*!*****************************!*\
+  !*** ./components/index.js ***!
+  \*****************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _messagelist_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messagelist.js */ \"./app_src/messagelist.js\");\n\n\n\nvar messages = [{\n  name: \"Oleg\",\n  content: \"Hi, all!\"\n}, {\n  name: \"Anton\",\n  content: \"Hello!\"\n}, {\n  name: \"Oleg\",\n  content: \"Interesting lesson? )\"\n}]; // const Message = ({name, content}) => {\n//     return <li><strong>{name}:</strong> {content}</li>\n// }\n// const MessageList = ({messages}) => {\n//     return (<ul>\n//         {messages.map((item, index) => <Message {...item} key={index} />)}\n//     </ul>);\n// }\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messagelist_js__WEBPACK_IMPORTED_MODULE_2__[\"MessageList\"], {\n  messages: messages\n}), document.getElementById(\"root\"));\n\n//# sourceURL=webpack:///./app_src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _messagelist_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messagelist.js */ \"./components/messagelist.js\");\n\n\n\nvar messages = [{\n  name: \"Oleg\",\n  content: \"Hi, all!\"\n}, {\n  name: \"Anton\",\n  content: \"Hello!\"\n}, {\n  name: \"Oleg\",\n  content: \"Interesting lesson? )\"\n}]; // const Message = ({name, content}) => {\n//     return <li><strong>{name}:</strong> {content}</li>\n// }\n// const MessageList = ({messages}) => {\n//     return (<ul>\n//         {messages.map((item, index) => <Message {...item} key={index} />)}\n//     </ul>);\n// }\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messagelist_js__WEBPACK_IMPORTED_MODULE_2__[\"MessageList\"], {\n  messages: messages\n}), document.getElementById(\"root\"));\n\n//# sourceURL=webpack:///./components/index.js?");
 
 /***/ }),
 
-/***/ "./app_src/message.js":
-/*!****************************!*\
-  !*** ./app_src/message.js ***!
-  \****************************/
+/***/ "./components/message.js":
+/*!*******************************!*\
+  !*** ./components/message.js ***!
+  \*******************************/
 /*! exports provided: Message */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Message\", function() { return Message; });\nvar Message = function Message(_ref) {\n  var name = _ref.name,\n      content = _ref.content;\n  return React.createElement(\"li\", null, React.createElement(\"b\", null, name, \": \"), \" \", content);\n};\n\n//# sourceURL=webpack:///./app_src/message.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Message\", function() { return Message; });\nvar Message = function Message(_ref) {\n  var name = _ref.name,\n      content = _ref.content;\n  return React.createElement(\"li\", null, React.createElement(\"b\", null, name, \": \"), \" \", content);\n};\n\n//# sourceURL=webpack:///./components/message.js?");
 
 /***/ }),
 
-/***/ "./app_src/messagelist.js":
-/*!********************************!*\
-  !*** ./app_src/messagelist.js ***!
-  \********************************/
+/***/ "./components/messagelist.js":
+/*!***********************************!*\
+  !*** ./components/messagelist.js ***!
+  \***********************************/
 /*! exports provided: MessageList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"MessageList\", function() { return MessageList; });\n/* harmony import */ var _message_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message.js */ \"./app_src/message.js\");\nfunction _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\n\nvar MessageList = function MessageList(_ref) {\n  var messages = _ref.messages;\n  return React.createElement(\"ul\", null, messages.map(function (item, index) {\n    return React.createElement(_message_js__WEBPACK_IMPORTED_MODULE_0__[\"Message\"], _extends({}, item, {\n      key: index\n    }));\n  }));\n};\n\n//# sourceURL=webpack:///./app_src/messagelist.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"MessageList\", function() { return MessageList; });\n/* harmony import */ var _message_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message.js */ \"./components/message.js\");\nfunction _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }\n\n\nvar MessageList = function MessageList(_ref) {\n  var messages = _ref.messages;\n  return React.createElement(\"ul\", null, messages.map(function (item, index) {\n    return React.createElement(_message_js__WEBPACK_IMPORTED_MODULE_0__[\"Message\"], _extends({}, item, {\n      key: index\n    }));\n  }));\n};\n\n//# sourceURL=webpack:///./components/messagelist.js?");
 
 /***/ }),
 
