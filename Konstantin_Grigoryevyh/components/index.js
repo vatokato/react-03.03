@@ -1,22 +1,38 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { MessageList } from './messagelist.js';
+import { MessageList } from './MessageList.js';
+import Form from './AddMessage.js';
 
-const messages = [
-    { name: "Oleg", content: "Hi, all!" },
-    { name: "Anton", content: "Hello!" },
-    { name: "Oleg", content: "Interesting lesson? )" },
-]
+class ShowChat extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            messages: [
+                { name: "Oleg", content: "Hi, all!" },
+                { name: "Anton", content: "Hello!" },
+                { name: "Oleg", content: "Interesting lesson? )" },
+            ]
+        };
 
+        this.updateMessageList = this.updateMessageList.bind(this);
+    }
 
-// const Message = ({name, content}) => {
-//     return <li><strong>{name}:</strong> {content}</li>
-// }
+    updateMessageList(message) {
+        const array = [...this.state.messages, message];
 
-// const MessageList = ({messages}) => {
-//     return (<ul>
-//         {messages.map((item, index) => <Message {...item} key={index} />)}
-//     </ul>);
-// }
+        this.setState({ messages: array });
+    }
 
-ReactDOM.render(<MessageList messages={messages} />, document.getElementById("root"))
+    render() {
+        const { messages } = this.state;
+
+        return (
+                <div>
+                    <MessageList messages={messages} />
+                    <Form updateMessageList={this.updateMessageList} />
+                </div>
+        );
+    }
+}
+
+ReactDOM.render(<ShowChat />, document.getElementById("root"))
