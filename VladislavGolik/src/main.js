@@ -14,7 +14,7 @@ return <li><strong>{props.name}</strong>{props.content}</li>
 const MassageList = (props) => {
     return (
         <ul>
-        {props.massages.map(item => Massage(item))}
+        {props.massages.map(item => <Massage {...item} />)}
         </ul>
     );
 }
