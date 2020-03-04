@@ -5,6 +5,7 @@ import SendForm from './components/SendForm';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       messages: [
         { author: 'Ivan', text: 'Hi Guys' },
@@ -17,9 +18,7 @@ export default class App extends React.Component {
   }
 
   updateMessagesList(message) {
-    const array = [...this.state.messages, message];
-
-    this.setState({ messages: array });
+    this.setState({ messages: [...this.state.messages, message] });
   }
 
   render() {
