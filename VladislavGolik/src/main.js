@@ -14,4 +14,4 @@ function Link(props) {
 return <a href={"https://" + props.to}>{props.to.toLocaleUpperCase()}</a>
 }
 
-ReactDOM.render(React.createElement(Link, {to: "ya.ru"}), document.getElementById("root"));
+ReactDOM.render(<Link to="ya.ru"/>, document.getElementById("root"));
