@@ -1,5 +1,4 @@
 import React from 'react';
-import SendButton from './SendButton';
 
 export default class SendForm extends React.Component {
   constructor(props) {
@@ -38,7 +37,9 @@ export default class SendForm extends React.Component {
           placeholder="Write your Message"
           required
         />
-        <SendButton text="Send Message" />
+        <button className="content__submit" type="submit">
+          Send Message
+        </button>
       </form>
     );
   }
