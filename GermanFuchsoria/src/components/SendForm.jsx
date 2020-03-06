@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export default class SendForm extends React.Component {
-  constructor(props) {
-    super(props);
+export default class SendForm extends Component {
+  static propTypes = {
+    updateMessagesList: PropTypes.func.isRequired
+  };
 
-    this.updateMessagesList = this.props.updateMessagesList;
-    this.sendMessage = this.sendMessage.bind(this);
-  }
+  updateMessagesList = this.props.updateMessagesList;
+
   clearInput(input) {
     input.value = '';
   }
-  sendMessage(e) {
+  sendMessage = e => {
     e.preventDefault();
     const { name, message } = e.target;
 
@@ -18,7 +19,7 @@ export default class SendForm extends React.Component {
       .then(this.updateMessagesList({ author: name.value, text: message.value }))
       .then(this.clearInput(message))
       .catch(err => console.log(err));
-  }
+  };
 
   render() {
     return (
