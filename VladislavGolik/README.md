@@ -7,7 +7,6 @@ ReactJS • 03.03.2020 MSK (UTC+3)
 + Россия, г. Москва, 30 лет
 + [geekbrains users](https://geekbrains.ru/users/91192)
 
-
 ### Урок 1
 
 - ~~Установить node и npm.~~
