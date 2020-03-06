@@ -1,16 +1,12 @@
 import React from 'react';
 
 export default class SendForm extends React.Component {
-  constructor(props) {
-    super(props);
+  updateMessagesList = this.props.updateMessagesList;
 
-    this.updateMessagesList = this.props.updateMessagesList;
-    this.sendMessage = this.sendMessage.bind(this);
-  }
   clearInput(input) {
     input.value = '';
   }
-  sendMessage(e) {
+  sendMessage = e => {
     e.preventDefault();
     const { name, message } = e.target;
 
@@ -18,7 +14,7 @@ export default class SendForm extends React.Component {
       .then(this.updateMessagesList({ author: name.value, text: message.value }))
       .then(this.clearInput(message))
       .catch(err => console.log(err));
-  }
+  };
 
   render() {
     return (
