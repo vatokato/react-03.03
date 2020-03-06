@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export default class SendForm extends React.Component {
+export default class SendForm extends Component {
+  static propTypes = {
+    updateMessagesList: PropTypes.func.isRequired
+  };
+
   updateMessagesList = this.props.updateMessagesList;
 
   clearInput(input) {
