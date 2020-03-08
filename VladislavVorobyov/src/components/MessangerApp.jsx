@@ -1,12 +1,13 @@
 import React from 'react';
-import MessageList from './message-list.jsx';
+import {MessageList} from 'Components/MessageList/MessageList';
 
 const messages = [
     {id: 1, author: "Vlad", content: "Hello, world!"},
     {id: 2, author: "World", content: "Hello, Vlad!"},
 ];
 
-class MessengerApp extends React.Component {
+export class MessengerApp extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -61,5 +62,3 @@ class MessengerApp extends React.Component {
         }));
     }
 }
-
-export default MessengerApp;
