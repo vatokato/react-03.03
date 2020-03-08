@@ -3,6 +3,8 @@ import {MessageList} from 'Components/MessageList/MessageList';
 import {MessageInput} from 'Components/MessageInput/MessageInput';
 
 
+const botMessages = ['Да, что ты говоришь...', 'Хмм, как интересно.', 'Не верю']
+
 class Sequence {
     static _last_id = 0;
     static get next() {
@@ -19,6 +21,15 @@ export class MessengerApp extends React.Component {
         author: "Vladislav",
     };
 
+    componentDidUpdate() {
+        const {messages, author} = this.state;
+        const lastMessage = messages[messages.length - 1];
+        if (lastMessage.author !== author) {
+            return;
+        }
+        const response = botMessages[Math.floor(Math.random() * botMessages.length)];
+        this.handleNewMessage(response, 'Bot');
+    }
     render() {
         const {messages, author} = this.state;
         let messageList;
