@@ -1,59 +1,49 @@
 import React from 'react';
 import {MessageList} from 'Components/MessageList/MessageList';
+import {MessageInput} from 'Components/MessageInput/MessageInput';
 
-const messages = [
-    {id: 1, author: "Vlad", content: "Hello, world!"},
-    {id: 2, author: "World", content: "Hello, Vlad!"},
-];
+
+class Sequence {
+    static _last_id = 0;
+    static get next() {
+        this._last_id++;
+        return this._last_id;
+    }
+}
+
 
 export class MessengerApp extends React.Component {
 
     state = {
-        messages: [...messages],
-        message: '',
-        author: 'Anonimous',
-    }
+        messages: [],
+        author: "Vladislav",
+    };
 
     render() {
+        const {messages, author} = this.state;
+        let messageList;
+        if (messages.length) {
+            messageList = <MessageList messages={messages} />
+        } else {
+            messageList = <p>Нет сообщений</p>
+        }
         return (
             <div>
                 <h3>Messanger</h3>
-                <label htmlFor="author">Кто вы: </label>
-                <input
-                    id={"author"}
-                    onChange={this.handleChange}
-                    value={this.state.author}
-                />
-                <MessageList messages={this.state.messages} />
-                <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="message">Сообщение: </label>
-                    <input
-                        id={"message"}
-                        onChange={this.handleChange}
-                        value={this.state.message}
-                    />
-                </form>
+                {messageList}
+                <MessageInput handleNewMessage={this.handleNewMessage} author={this.state.author} />
             </div>
         );
     }
 
-    handleChange = (e) => {
-        this.setState({[e.target.id]: e.target.value});
+    handleChangeAuthor = (e) => {
+        this.setState({'author': e.target.value});
+    };
+
+    handleNewMessage = (content, author) => {
+        this.setState(state => (
+            {messages: [...this.state.messages, {id: Sequence.next, content: content, author: author}]}
+        ));
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        if (!this.state.message.length){
-            return;
-        }
-        const newMessage = {
-            id: this.state.messages.length+1,
-            author: this.state.author.length?this.state.author:'Anonimous',
-            content: this.state.message,
-        };
-        this.setState(state => ({
-            messages: state.messages.concat(newMessage),
-            message: '',
-        }));
-    }
 }
