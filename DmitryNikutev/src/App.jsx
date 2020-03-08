@@ -1,29 +1,24 @@
-import React from "react"
-import MessageList from "./components/MessageList";
+import React, {Component} from "react"
+import {MessagingContainer} from "./components/MessagingContainer";
+import {Login} from "./components/Login";
 
 
-export default function App() {
-   const MESSAGE = {
-      name: "Guest",
-      text: "Liked this image"
+export default class App extends Component {
+
+   state = {
+      username: "Guest"
    };
-   
-   const INITIAL_STATE = [{
-      name: "Dmitry",
-      text: "Liked this image"
-   }];
-   
-   const [messages, setMessages] = React.useState(INITIAL_STATE);
-   
-   const addMessage = () => {
-      setMessages([...messages, MESSAGE]);
+
+   setUsername = (username) => {
+      this.setState((state) => ({username: username}))
    };
-   
-   return (
-      <div>
-         <img src="https://picsum.photos/250" alt="Here was an image. Or wasn`t"/> <br/>
-         <button onClick={addMessage} > {"<3"} </button>
-         <MessageList messages={messages}/>
-      </div>
-   );
+
+   render() {
+      return (
+         <>
+            <Login username={this.state.username} updateUsername={this.setUsername}/>
+            <MessagingContainer username={this.state.username}/>
+         </>
+      );
+   }
 }
