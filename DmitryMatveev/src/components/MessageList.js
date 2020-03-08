@@ -1,7 +1,7 @@
-import React from 'react';
-import Message from './Message';
+import React,{Component} from 'react';
+import Message from './Message.jsx/Message';
 
-export default class MessageList extends React.Component {
+export default class MessageList extends Component {
   render() {
     const { messages } = this.props;
 

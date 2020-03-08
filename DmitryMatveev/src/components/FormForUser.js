@@ -1,7 +1,7 @@
-import React from 'react';
+import React,{Component} from 'react';
 import Button from './Button';
 
-export default class FormForUser extends React.Component {
+export default class FormForUser extends Component {
   constructor(props) {
     super(props);
 
@@ -28,17 +28,17 @@ export default class FormForUser extends React.Component {
           type="text"
           name="name"
           className="content__input content__input_name"
-          placeholder="Write your Name"
+          placeholder="Введите имя"
           required
         />
         <input
           type="text"
           name="message"
           className="content__input content__input_message"
-          placeholder="Write your Message"
+          placeholder="Введите сообщение"
           required
         />
-        <SendButton text="Send Message" />
+        <Button text="Отправить сообщение" />
       </form>
     );
   }
