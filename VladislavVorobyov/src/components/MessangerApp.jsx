@@ -8,15 +8,10 @@ const messages = [
 
 export class MessengerApp extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            messages: [...messages],
-            message: '',
-            author: 'Anonimous',
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+    state = {
+        messages: [...messages],
+        message: '',
+        author: 'Anonimous',
     }
 
     render() {
@@ -42,11 +37,11 @@ export class MessengerApp extends React.Component {
         );
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({[e.target.id]: e.target.value});
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault();
         if (!this.state.message.length){
             return;
