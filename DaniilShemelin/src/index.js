@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Counter } from "./components/Counter.jsx";
 import './css/main.css';
 
 const messages = [
@@ -44,6 +45,6 @@ const NewMessage = () => {
 }
 
 ReactDOM.render(
-  <MessageList messages={ messages } />,
+  <Counter />,
   document.getElementById('app')
 );
