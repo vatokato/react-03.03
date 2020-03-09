@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { MessageList } from './messagelist.js';
+import { App } from './components/App.jsx';
+import './style.css'
 
-const messages = [
-    { name: "Ivan", content: "Hello, world!" },
-    { name: "Petr", content: "Helo, how are you?" },
-    { name: "Ivan", content: "I'm well" },
-]
+// const messages = [
+//     { name: "Ivan", content: "Hello, world!" },
+//     { name: "Petr", content: "Helo, how are you?" },
+//     { name: "Ivan", content: "I'm well" },
+// ]
 
 
 // const Message = ({name, content}) => {
@@ -19,4 +20,4 @@ const messages = [
 //     </ul>);
 // }
 
-ReactDOM.render(<MessageList messages={messages} />, document.getElementById("root"))
+ReactDOM.render(<App />, document.getElementById("root"))
