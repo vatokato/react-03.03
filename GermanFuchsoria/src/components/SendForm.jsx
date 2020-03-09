@@ -11,14 +11,13 @@ export default class SendForm extends Component {
   clearInput(input) {
     input.value = '';
   }
+
   sendMessage = e => {
     e.preventDefault();
     const { name, message } = e.target;
 
-    Promise.resolve()
-      .then(this.updateMessagesList({ author: name.value, text: message.value }))
-      .then(this.clearInput(message))
-      .catch(err => console.log(err));
+    this.updateMessagesList({ author: name.value, text: message.value, authorAccess: 'user' });
+    this.clearInput(message);
   };
 
   render() {
