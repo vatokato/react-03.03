@@ -1,4 +1,5 @@
-import { Message } from './Message.js'
+import React from "react";
+import { Message } from '../Message/Message'
 
 export const MessageList = ({messages}) => {
     return (<ul>
