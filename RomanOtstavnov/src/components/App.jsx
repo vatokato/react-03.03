@@ -34,16 +34,15 @@ export class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { state } = this;
-    if(state.messages.length > prevState.messages.length) {
-      const lastMessage = state.messages[state.messages.length - 1];
-      if(lastMessage.name !== state.ai.name) {
-        this.setMessage({
-          name: state.ai.name,
-          content: state.ai.getAnswer(lastMessage)
-        });
-      }
+    const { messages, ai } = this.state;
+    const lastMessage = messages[messages.length - 1];
+    if(lastMessage.name !== ai.name) {
+      this.setMessage({
+        name: ai.name,
+        content: ai.getAnswer(lastMessage)
+      });
     }
+
   }
 
   setMessage (message) {
