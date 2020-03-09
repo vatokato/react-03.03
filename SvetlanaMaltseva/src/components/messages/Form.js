@@ -15,7 +15,7 @@ class Form extends Component {
   }
   sendForm(e) {
     console.log('test');
-    e.preventDefault;
+    e.preventDefault();
     const { newMessage } = e.target;
     this.addMessage({ name: 'Me', text: newMessage.value });
   }
