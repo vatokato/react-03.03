@@ -57,5 +57,13 @@ module.exports = {
   devServer: {
     contentBase: 'src',
     port: 7000,
+    proxy: {
+      '/aiproject/api/': {
+        target: 'https://aiproject.ru/api/',
+        pathRewrite: { '/aiproject/api/': '' },
+        secure: false,
+        changeOrigin: true,
+      }
+    }
   }
 };

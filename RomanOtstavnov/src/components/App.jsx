@@ -1,27 +1,15 @@
 import React, { Component } from 'react';
 import MessageList from "./MessageList";
 import MessageForm from "./MessageForm";
+import Bot from '../bots/aiprojectBot';
 
-const externalAi = {
-  name: 'AI',
-  messages: [
-    'Неплохая попытка, %name%',
-    '%name%, полегче',
-    'Мне кажется, что ты преувеличиваешь',
-    '%name%, я тебя не понимаю',
-  ],
-  getAnswer: ({ name }) => {
-    const randIndex = Math.floor(Math.random() * externalAi.messages.length);
-    return externalAi.messages[randIndex].replace('%name%', name);
-  }
-};
 
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
-      ai: externalAi,
+      Bot: new Bot('mr.Bot'),
     };
 
     this.setMessage = this.setMessage.bind(this);
@@ -34,15 +22,22 @@ export class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { messages, ai } = this.state;
+    const { messages, Bot } = this.state;
     const lastMessage = messages[messages.length - 1];
-    if(lastMessage.name !== ai.name) {
-      this.setMessage({
-        name: ai.name,
-        content: ai.getAnswer(lastMessage)
-      });
+    if(lastMessage.name !== Bot.name) {
+      Bot.getAnswer(
+        { name: lastMessage.name, message: lastMessage.content },
+        answer => {
+          this.setMessage({
+            name: Bot.name,
+            content: answer
+          });
+        },
+        error => {
+          console.error(error);
+        }
+      );
     }
-
   }
 
   setMessage (message) {
