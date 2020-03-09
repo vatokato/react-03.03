@@ -1,34 +1,65 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { Component } from 'react';
+import isFunction from 'lodash/isFunction';
 
-export const MessageForm = ({ setMessage }) => {
-  const [trigger, updateForm] = useState(false);
+export class MessageForm extends Component {
+  constructor(props) {
+    super(props);
+    this.handleMessageField = this.handleMessageField.bind(this);
+    this.handleNameField = this.handleNameField.bind(this);
+    this.sendForm = this.sendForm.bind(this);
+  }
 
-  const nameInput = useRef();
-  const messageInput = useRef();
+  state = {
+    name: '',
+    message: '',
+  };
 
-  useEffect(() => {
-    const name = nameInput.current.value;
-    const content = messageInput.current.value;
-
-    if(name && content) {
+  sendForm (e) {
+    e.preventDefault();
+    const { name, message: content } = this.state;
+    const { setMessage } = this.props;
+    if(name && content && isFunction(setMessage)) {
       setMessage({ name, content });
-      messageInput.current.value = '';
+      this.setState({ message: '' });
     }
-  }, [trigger]);
+  };
 
-  return (
-    <form
-      className='message-form'
-      onSubmit={e => {
-        e.preventDefault();
-        updateForm(!trigger);
-      }}
-    >
-      <input type="text" placeholder='Имя' ref={nameInput}/>
-      <input type="text" placeholder='Сообщение' ref={messageInput} />
-      <input type="submit" value='Отправить' />
-    </form>
-  );
+  handleNameField (e) {
+    e.preventDefault();
+    const { value: name } = e.target;
+    this.setState({ name });
+  };
+
+  handleMessageField (e) {
+    e.preventDefault();
+    const { value: message } = e.target;
+    this.setState({ message });
+  }
+
+  render () {
+    const { name, message } = this.state;
+    return (
+      <form
+        className='message-form'
+        onSubmit={this.sendForm}
+      >
+        <input
+          name='name'
+          onChange={this.handleNameField}
+          type="text" value={name}
+          placeholder='Имя'
+        />
+        <input
+          name='message'
+          onChange={this.handleMessageField}
+          type="text"
+          value={message}
+          placeholder='Сообщение'
+        />
+        <input type="submit" value='Отправить' />
+      </form>
+    )
+  };
 };
 
 export default MessageForm;
