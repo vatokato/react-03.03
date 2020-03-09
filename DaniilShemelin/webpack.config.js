@@ -14,12 +14,12 @@ module.exports = {
         include: path.resolve(__dirname, "src"),
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/env', '@babel/react']
+            presets: ['@babel/env', '@babel/react'],
+            plugins: ['@babel/plugin-proposal-class-properties']
         }
       },
       {
         test: /\.(css)$/,
-        include: path.resolve(__dirname, "src/css"),
         use: [
           { loader: 'style-loader', options: { injectType: 'linkTag' } },
           { loader: 'file-loader' },
