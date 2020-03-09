@@ -11,6 +11,8 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+.idea/
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -107,3 +109,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+
+# Created by https://www.gitignore.io/api/phpstorm
+# Edit at https://www.gitignore.io/?templates=phpstorm
+
+.idea
