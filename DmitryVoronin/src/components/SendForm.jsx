@@ -1,17 +1,17 @@
-import React from 'react';
-import SendButton from './SendButton';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export default class SendForm extends React.Component {
-    constructor(props) {
-        super(props);
+export default class SendForm extends Component {
+    static propTypes = {
+        updateMessagesList: PropTypes.func.isRequired
+    };
 
-        this.updateMessagesList = this.props.updateMessagesList;
-        this.sendMessage = this.sendMessage.bind(this);
-    }
+    updateMessagesList = this.props.updateMessagesList;
+
     clearInput(input) {
         input.value = '';
     }
-    sendMessage(e) {
+    sendMessage = e => {
         e.preventDefault();
         const { name, message } = e.target;
 
@@ -19,26 +19,26 @@ export default class SendForm extends React.Component {
             .then(this.updateMessagesList({ author: name.value, text: message.value }))
             .then(this.clearInput(message))
             .catch(err => console.log(err));
-    }
+    };
 
     render() {
         return (
-            <form className="content__form" onSubmit={this.sendMessage}>
+            <form onSubmit={this.sendMessage}>
                 <input
                     type="text"
                     name="name"
-                    className="content__input content__input_name"
                     placeholder="Write your Name"
                     required
                 />
                 <input
                     type="text"
                     name="message"
-                    className="content__input content__input_message"
                     placeholder="Write your Message"
                     required
                 />
-                <SendButton text="Send Message" />
+                <button type="submit">
+                    Send Message
+                </button>
             </form>
         );
     }
