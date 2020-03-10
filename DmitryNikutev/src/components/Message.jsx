@@ -1,7 +1,8 @@
 import React from "react"
 
-export default function Message({name, text}) {
+
+export const Message = ({name, text}) => {
    return (
       <li><strong>{name}:</strong> {text}</li>
    );
-}
+};
