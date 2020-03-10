@@ -1,65 +1,69 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import isFunction from 'lodash/isFunction';
 
-export class MessageForm extends Component {
-  constructor(props) {
-    super(props);
-    this.handleMessageField = this.handleMessageField.bind(this);
-    this.handleNameField = this.handleNameField.bind(this);
-    this.sendForm = this.sendForm.bind(this);
-  }
+const useInput = (initialState) => {
+  const [state, setState] = useState(initialState);
+  const setInput = ({ currentTarget: { value }}) => setState(value);
+  return [state, setInput];
+};
 
-  state = {
-    name: '',
-    message: '',
-  };
+export const MessageForm = ({ setMessage }) => {
+  const [name, setName] = useInput('');
+  const [content, setContent] = useInput('');
+  const [nameSaved, setNameSaved] = useState(false);
 
-  sendForm (e) {
+  const messageField = useRef();
+
+  useEffect(() => {
+    messageField.current.focus();
+  }, []);
+
+  const sendForm = (e) => {
     e.preventDefault();
-    const { name, message: content } = this.state;
-    const { setMessage } = this.props;
     if(name && content && isFunction(setMessage)) {
       setMessage({ name, content });
-      this.setState({ message: '' });
+      setContent({ currentTarget: { value: '' } });
+      setNameSaved(true);
+      messageField.current.focus();
     }
   };
 
-  handleNameField (e) {
-    e.preventDefault();
-    const { value: name } = e.target;
-    this.setState({ name });
-  };
-
-  handleMessageField (e) {
-    e.preventDefault();
-    const { value: message } = e.target;
-    this.setState({ message });
-  }
-
-  render () {
-    const { name, message } = this.state;
-    return (
-      <form
-        className='message-form'
-        onSubmit={this.sendForm}
-      >
-        <input
-          name='name'
-          onChange={this.handleNameField}
-          type="text" value={name}
-          placeholder='Имя'
-        />
-        <input
-          name='message'
-          onChange={this.handleMessageField}
-          type="text"
-          value={message}
-          placeholder='Сообщение'
-        />
-        <input type="submit" value='Отправить' />
-      </form>
-    )
-  };
+  return (
+    <form
+      className='message-form'
+      onSubmit={sendForm}
+    >
+      {nameSaved
+        ? (
+          <div>
+            <strong>{name}</strong>
+            <span style={{
+              display: 'inline-block',
+              color: 'red',
+              cursor: 'pointer',
+              marginLeft: '10px',
+            }} onClick={() => setNameSaved(false)}>x</span>
+          </div>
+        ) : (
+          <input
+            name='name'
+            type="text"
+            value={name}
+            onChange={setName}
+            placeholder='Имя'
+          />
+        )
+      }
+      <input
+        name='message'
+        ref={messageField}
+        value={content}
+        onChange={setContent}
+        placeholder='Сообщение'
+      />
+      <input type="submit" value='Отправить' />
+    </form>
+  )
 };
 
 export default MessageForm;
