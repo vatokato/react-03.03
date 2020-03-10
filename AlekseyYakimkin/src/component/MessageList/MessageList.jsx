@@ -15,7 +15,7 @@ export class MessageList extends Component {
         //console.dir({messages})
         console.log("mount")
         console.dir(this.props.messages)
-        this.setState({messages: [ ...this.props.messages]})
+        this.setState((state)=>({messages: [ ...this.props.messages]}))
     }
     componentDidUpdate() {
         if(this.state.messages[this.state.messages.length - 1].name !== 'Robot' && !this.state.thirstUpdate){
@@ -27,7 +27,7 @@ export class MessageList extends Component {
     pushNewMessage = (e) => {
         console.log('Click');
         console.dir(this.state.messages)
-        this.setState({ messages: [ ...this.state.messages, {name:"Alex", content: "Hi there!"} ],thirstUpdate: false });
+        this.setState((state)=>({ messages: [ ...this.state.messages, {name:"Alex", content: "Hi there!"} ],thirstUpdate: false }));
         
     //     messages.push(newMessage)
     //     ReactDOM.render(<MessageList messages={messages} /> , document.getElementById("root"))
