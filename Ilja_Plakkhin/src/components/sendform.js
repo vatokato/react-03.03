@@ -15,6 +15,7 @@ export default class SendForm extends React.Component {
     const { name, message } = dataFromInput.target;
     dataFromInput.preventDefault();
     Promise.resolve()
+
       .then(this.updateMessagesList({ author: name.value, text: message.value }))
   }
 render() {
