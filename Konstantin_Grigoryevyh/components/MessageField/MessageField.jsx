@@ -16,9 +16,7 @@ export default class MessageField extends React.Component {
     handleClick = (e) => {
         e.preventDefault();
         const { name , text} = e.target;
-        this.setState ({lastChatName: name.value});
-        this.setState({ messages: [ ...this.state.messages, {name: name.value, text: text.value}] });
-        this.setState ({robot: false});
+        this.setState ({lastChatName: name.value, messages: [ ...this.state.messages, {name: name.value, text: text.value}], robot: false});
         text.value = "";
     };
 
