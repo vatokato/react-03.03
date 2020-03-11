@@ -1,6 +1,8 @@
-class Bot {
+import Bot from "./Bot";
+
+class SimpleBot extends Bot {
   constructor(name) {
-    this.name = name || 'AI';
+    super(name || 'simpleBot');
     this.messages = [
       'Неплохая попытка, %name%',
       '%name%, полегче',
@@ -11,10 +13,10 @@ class Bot {
     ];
   }
 
-  getAnswer ({ name }, onSuccess, onError) {
+  async getAnswer ({ name }) {
     const randIndex = Math.floor(Math.random() * this.messages.length);
-    return onSuccess(this.messages[randIndex].replace('%name%', name));
+    return this.messages[randIndex].replace('%name%', name);
   }
 }
 
-export default Bot;
+export default SimpleBot;

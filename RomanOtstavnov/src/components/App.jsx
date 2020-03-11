@@ -9,10 +9,8 @@ export class App extends Component {
     super(props);
     this.state = {
       messages: [],
-      Bot: new Bot('mr.Bot'),
+      Bot: new Bot(),
     };
-
-    this.setMessage = this.setMessage.bind(this);
   }
 
   componentDidMount() {
@@ -25,18 +23,12 @@ export class App extends Component {
     const { messages, Bot } = this.state;
     const lastMessage = messages[messages.length - 1];
     if(lastMessage.name !== Bot.name) {
-      Bot.getAnswer(
-        { name: lastMessage.name, message: lastMessage.content },
-        answer => {
-          this.setMessage({
-            name: Bot.name,
-            content: answer
-          });
-        },
-        error => {
-          console.error(error);
-        }
-      );
+      Bot.getAnswer({ name: lastMessage.name, message: lastMessage.content })
+        .then(answer => this.setMessage({
+          name: Bot.name,
+          content: answer
+        }))
+        .catch(error => console.error(error));
     }
   }
 
@@ -51,7 +43,7 @@ export class App extends Component {
     return (
       <div className='container'>
         <MessageList messages={messages} />
-        <MessageForm setMessage={this.setMessage} />
+        <MessageForm setMessage={this.setMessage.bind(this)} />
       </div>
     );
   }

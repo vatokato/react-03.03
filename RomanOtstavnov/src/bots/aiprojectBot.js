@@ -1,12 +1,14 @@
+import Bot from './Bot.js';
 // https://aiproject.ru/?api
 // Пример запроса: query = {"ask":"Привет","userid":"654321","key":""}
-class Bot {
+
+class AiprojectBot extends Bot{
   constructor(name) {
-    this.name = name || 'aiprojectBot';
+    super(name || 'ms.Bot');
     this.api = '/aiproject/api/';
   }
 
-  getAnswer ({ name, message }, onSuccess, onError) {
+  async getAnswer ({ name, message }, onSuccess, onError) {
     const query = {
       ask: message,
         key: '',
@@ -16,20 +18,18 @@ class Bot {
     const formData = new FormData();
     formData.append('query', JSON.stringify(query));
 
-    fetch(this.api, {
+    let answer = await fetch(this.api, {
       method: 'POST',
       body: formData,
-    })
-      .then(r => r.json())
-      .then(r => {
-        if(r.status === 1 && r.aiml) {
-          return onSuccess(r.aiml);
-        } else if (r.status === 0) {
-          return onError(r.description);
-        }
-      })
-      .catch(error => console.log(error));
+    });
+    answer = await answer.json();
+
+    if(answer.status === 1 && answer.aiml) {
+      return answer.aiml;
+    } else {
+      return answer.description;
+    }
   }
 }
 
-export default Bot;
+export default AiprojectBot;
