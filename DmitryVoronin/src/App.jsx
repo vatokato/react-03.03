@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
-import MessageField from './components/MessageField';
+import {ChatContainer} from './container/ChatContainer';
 
-export default class App extends Component {
-
-    render() {
-        return (
-            <div>
-                <h1>Chat with People</h1>
-                <div>
-                    <MessageField />
-                </div>
-            </div>
-        );
-    }
+export const App = () => {
+    return (
+        <ChatContainer />
+    )
 }
