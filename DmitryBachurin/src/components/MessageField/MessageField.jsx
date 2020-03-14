@@ -14,21 +14,23 @@ export default class MessegeField extends Component {
     handleClick = (e) => {
         e.preventDefault();
         const { name, message } = e.target;
-
-        Promise.resolve()
-            .then(
-                this.setState(
-                    (state) => (state.messages.push({ name: name.value, content: message.value }))
-                )
-            )
-            .then(
-                this.setState(
-                    (state) => (state.messages.push({ name: 'Robot', content: `Уважаемый ${name.value}! Ваше сообщение принято.` }))
-                )
-            )
-            .catch(err => console.log(err));
-
+        this.setState(
+            (state) => (state.messages.push({ name: name.value, content: message.value }))
+        )
     }
+    componentDidUpdate() {
+        const name = this.state.messages[this.state.messages.length - 1].name;
+        if (name !== "Robot") {
+            this.addRobotAnswer(name);
+        }
+    }
+
+    addRobotAnswer(name) {
+        this.setState(
+            (state) => (state.messages.push({ name: 'Robot', content: `Уважаемый ${name}! Ваше сообщение принято.` }))
+        )
+    }
+
     render() {
         const { state: { messages }, handleClick } = this;
         return (
