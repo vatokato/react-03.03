@@ -18,10 +18,13 @@ class Form extends Component {
     this.setState({ name: e.target.value });
   };
   sendForm(e) {
+
     e.preventDefault();
     const { name, text } = this.state;
     this.addMessage({ name: name, text: text });
     this.setState({ name: '', text: '' });
+
+    
   }
 
   render() {
