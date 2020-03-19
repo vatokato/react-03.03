@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -16,7 +17,7 @@ export const ChatForm = ({ onSendMessage }) => {
     const [content, setContent] = useInput('');
 
     const onSubmit = () => {
-            onSendMessage({ name, content });
+        onSendMessage({ name, content });
     }
 
     return (<form>
@@ -44,6 +45,9 @@ export const ChatForm = ({ onSendMessage }) => {
             Send
         </Button>
     </form>
-
     );
+}
+
+ChatForm.propTypes = {
+    onSendMessage: PropTypes.func.isRequired,
 }
