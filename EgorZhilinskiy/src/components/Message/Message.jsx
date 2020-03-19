@@ -1,14 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import classname from 'classname';
 
+import './Message.css';
 
-
-const msg = (props) => {
-    let senderName = props.msg.usrName
-    let text = props.msg.msgBody
-    return (
-        
-        <li><strong>{senderName}:</strong> {text}</li>
-    )
+export const Message = ({name, content}) => {
+    const className = classname("Message", {"Message--robot" : name === "Robot"});
+    return <li className = {className} ><strong>{name}: </strong>{content}</li>
 }
 
-export default msg;
+Message.propTypes = {
+    name: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+}
+
