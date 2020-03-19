@@ -12,3 +12,15 @@ input:checked ~ label {
     color: white;
     background-color: blue;
 }
+
+.link {
+    display: block;
+    padding: 0 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.selected {
+    color: white;
+    background-color: blue;
+}
