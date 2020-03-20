@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Chat } from '../components/Chat/Chat.jsx';
 import { ChatList } from '../components/ChatList/ChatList.jsx'
+import {Link} from 'react-router-dom';
 
 import './ChatContainer.css'
 
@@ -66,6 +67,22 @@ export class ChatContainer extends Component {
         }), this.handleRobotAnswer);
     }
 
+    handleNewChat = () => {
+        
+        const name = prompt('Enter chat name')
+        const newId = Object.keys(this.state.chats).length + 1
+        this.setState((state) => ({
+            chats: {
+                ...state.chats,
+                [newId]: {
+                    name,
+                    messages: []
+                }
+            }
+        }))
+        debugger
+    }
+
     render() {
         const {id} = this.props.match.params;
         const messages = id && this.state.chats[id] ? this.state.chats[id].messages : undefined ;
@@ -73,8 +90,15 @@ export class ChatContainer extends Component {
 
         return (
         <div className="chatcontainer">
-            <header className="header">{headerText}</header>
-            <ChatList chats={this.state.chats} selectedId={id} />
+            <nav>
+                <Link to="/profile">Edit the profile</Link>
+                <Link to="/">Main page</Link>
+                <Link to="/about">About...</Link>
+            </nav>
+            <header className="header">
+                {headerText}
+            </header>
+            <ChatList chats={this.state.chats} selectedId={id} onNewChat={this.handleNewChat}/>
             <Chat messages={messages} onSendMessage={this.handleSendMessage(id)}/>
         </div>)
     }

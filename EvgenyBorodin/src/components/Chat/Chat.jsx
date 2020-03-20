@@ -9,12 +9,12 @@ import './Chat.css'
 export const Chat = ({messages, onSendMessage}) => {
     if (messages) {
         return (<div className="chat">
-            {messages.length ? <MessageList messages={messages}/> : "Нет сообщений" }
+            {messages.length ? <MessageList messages={messages}/> : <h2>No messages.</h2> }
             <ChatForm onSendMessage={onSendMessage}/>
         </div>);
     } else {
         return (<div className="chat">
-            <strong>Выберите чат в списке.</strong>
+            <h2>Choose chat in the chat list.</h2>
         </div>)
     }
 }

@@ -1,29 +1,24 @@
-import React, {Component, Fragment} from 'react';
-import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
-// import { MessageList } from './components/MessageList/MessageList.jsx'
-import { ChatContainer } from './containers/ChatContainer.jsx'
+import React from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import { ChatContainer } from './containers/ChatContainer.jsx';
+import { Main } from './components/Main/Main.jsx';
+import { About } from './components/About/About.jsx';
+import { Profile } from './components/Profile/Profile.jsx';
 
 import './App.css'
 
 export const App = () => {
     return (
-        <>
-        
         <BrowserRouter>
             <Switch>
-                <Route exact path="/">
-                    <h1>Main page</h1>
-                    <Link to="/chats">Мессенджер</Link>
-                </Route>
+                <Route exact path="/" component={Main} />
                 <Route exact path="/chats" component={ChatContainer} />
                 <Route exact path="/chats/:id" component={ChatContainer} />
-                <Route exact path="/about">
-                    <h1>It's about page</h1>
-                    <Link to="/chats">Мессенджер</Link>
-                </Route>
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/about" component={About} />
+                <Route path="/" component={Main} />
             </Switch>
         </BrowserRouter>
-        </>
     )
 }
 
