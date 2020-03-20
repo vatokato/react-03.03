@@ -8,24 +8,31 @@ module.exports = {
         filename: "index.js"
 
     },
-    
+
     module: {
-       rules: [
-           {
-               test: /\.(js)$/,
-               include: path.resolve(__dirname, "src"),
-               loader: 'babel-loader',
-               options: {
-                 presets: ['@babel/env', '@babel/react'],
-               }
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                include: path.resolve(__dirname, "src"),
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/env', '@babel/react'],
+                    plugins: ['@babel/plugin-proposal-class-properties']
+                }
            },
        ],
-   },
+    },
 
-    
+
     plugins: [
-        new htmlWebpackPlugin({template: path.resolve(__dirname, "src", "index.html")})
-    ]
-    
+        new htmlWebpackPlugin({
+            template: path.resolve(__dirname, "src", "index.html")
+        })
+    ],
+
+    resolve: {
+        extensions: [".jsx", ".js"],
+    }
+
 
 }
