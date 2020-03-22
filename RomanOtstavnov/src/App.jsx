@@ -25,7 +25,7 @@ export const App = () => (
     <div className={cx('wrapper')}>
       <BrowserRouter>
         <Header />
-        <Switch style={{ flexGrow: 1 }}>
+        <Switch>
             <Route path="/" exact>It's index page</Route>
             <Route path="/chats" exact component={ChatContainer} />
             <Route path="/chats/:id" component={ChatContainer} />
