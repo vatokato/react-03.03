@@ -9,14 +9,13 @@ import Typography from "@material-ui/core/Typography";
 
 const cx = classnames.bind(styles);
 
-export const Chat = (props) => {
-  const {
-    chats = [],
-    chatId,
-    activeChat,
-    addMessage,
-    addChat,
-  } = props;
+export const Chat = ({
+  chats = [],
+  chatId,
+  activeChat,
+  addMessage,
+  addChat,
+}) => {
   const messageListRef = useRef();
   return (
     <div className={cx('wrapper')}>
