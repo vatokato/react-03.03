@@ -1,13 +1,13 @@
 import styles from './app.scss';
 import classnames from 'classnames/bind';
 import React from 'react';
-import Header from "./components/Header/Header";
-import ChatContainer from "./containers/ChatContainer";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {initStore} from "../store";
 import {initChats, loadData} from "../store/chatActions";
 import {init as initProfile} from "../store/profileActions";
 import {Provider} from "react-redux";
+import HeaderContainer from "./containers/HeaderContainer";
+import ChatContainer from "./containers/ChatContainer";
 
 const cx = classnames.bind(styles);
 
@@ -24,7 +24,7 @@ export const App = () => (
   <Provider store={store}>
     <div className={cx('wrapper')}>
       <BrowserRouter>
-        <Header />
+        <HeaderContainer />
         <Switch>
             <Route path="/" exact>It's index page</Route>
             <Route path="/chats" exact component={ChatContainer} />

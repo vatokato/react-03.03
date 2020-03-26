@@ -1,42 +1,37 @@
 import styles from './chat.scss';
 import classnames from 'classnames/bind';
 import React, { useRef }  from 'react';
-import ChatList from "../../components/ChatList/ChatList";
 import MessageForm from "../../components/MessageForm/MessageForm";
 import MessageList from "../../components/MessageList/MessageList";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
+import ChatListContainer from "../../containers/ChatListContainer";
 
 const cx = classnames.bind(styles);
 
 export const Chat = ({
-  chats = [],
-  chatId,
-  activeChat,
+  activeChatId,
+  messages,
   addMessage,
-  addChat,
 }) => {
   const messageListRef = useRef();
   return (
     <div className={cx('wrapper')}>
       <div className={cx('content')}>
-        <ChatList
-          containerClassName={cx('chat-list')}
-          items={chats}
-          addChat={addChat}
-        />
+        <ChatListContainer className={cx('chat-list')} />
+
         <Box py={1} px={2} className={cx('message-field')} ref={messageListRef}>
-          {activeChat && activeChat.messages.length
+          {messages
             ?(
-              <MessageList messages={activeChat.messages} containerRef={messageListRef} />
+              <MessageList messages={messages} containerRef={messageListRef} />
             ) : (
-              <Typography>{chatId ? 'Сообщений нет' : 'Выберите чат'}</Typography>
+              <Typography>{activeChatId ? 'Сообщений нет' : 'Выберите чат'}</Typography>
             )
           }
         </Box>
       </div>
       <div className={cx('footer')}>
-        {Boolean(chatId) && <MessageForm addMessage={addMessage} />}
+        {Boolean(activeChatId) && <MessageForm addMessage={addMessage} />}
       </div>
     </div>
   );

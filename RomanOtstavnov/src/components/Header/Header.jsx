@@ -6,7 +6,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import {NavLink} from "react-router-dom";
 import Box from "@material-ui/core/Box";
-import {connect} from "react-redux";
 
 const cx = classnames.bind(styles);
 
@@ -30,7 +29,5 @@ const Header = ({ name }) => {
   );
 };
 
-const mapStateToProps = ({profile}) => ({...profile});
-
-export default connect(mapStateToProps)(Header);
+export default Header;
 

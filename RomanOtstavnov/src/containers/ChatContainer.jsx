@@ -4,37 +4,37 @@ import {MESSAGE_TYPE} from "../constants";
 import get from 'lodash/get';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {addChat, addMessage, loadData} from "../../store/chatActions";
+import {addMessage} from "../../store/chatActions";
 import Chat from '../components/Chat/Chat';
 
 const bot = new Bot();
 
 const mapStateToProps = ({ chat }, props) => {
   const { chats = [] } = chat;
+  const activeChatId =  parseInt(get(props, 'match.params.id', 0));
+  const activeChat = chats.find(item => item.id === activeChatId);
   return {
-    chatId:  parseInt(get(props, 'match.params.id', 0)),
-    chats
+    activeChatId,
+    messages: activeChat && activeChat.messages || [],
   }
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   addMessage,
-  addChat,
 }, dispatch);
 
 const mergeProps = ({
-  chatId,
-  chats,
+  activeChatId,
+  messages,
 }, {
   addMessage: addMessageDispatch,
-  addChat: addChatDispatch,
 }) => {
 
   const addMessage = ({name, content}) => {
-    addMessageDispatch(chatId, name, content);
+    addMessageDispatch(activeChatId, name, content);
     bot.getAnswer({ name, message: content })
       .then(answer => addMessageDispatch(
-        chatId,
+        activeChatId,
         bot.name,
         answer,
         MESSAGE_TYPE.ai
@@ -43,11 +43,9 @@ const mergeProps = ({
   };
 
   return {
-    chats,
-    chatId: chats.some(item=>item.id===chatId) ? chatId : false,
-    activeChat: chats.find(item => item.id === chatId),
+    activeChatId,
+    messages,
     addMessage,
-    addChat: ({ name }) => addChatDispatch(name),
   }
 };
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Chat);

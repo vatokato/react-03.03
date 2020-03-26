@@ -1,23 +1,24 @@
 import styles from './chat-list.scss';
 import classnames from 'classnames/bind';
-import React, {useState} from 'react';
+import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import {Box} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import isFunction from 'lodash/isFunction';
 import TextField from "@material-ui/core/TextField";
+import {useInput} from "../../hooks/useInput";
 
 const cx = classnames.bind(styles);
 
 export const ChatList = ({ items, containerClassName, addChat }) => {
-  const [chatName, setChatName] = useState('');
+  const [chatName, setChatName, clearChatName] = useInput('');
 
   const sendForm = (e) => {
     e.preventDefault();
     if(chatName){
       isFunction(addChat) && addChat({ name: chatName });
-      setChatName('');
+      clearChatName();
     }
   };
 
@@ -47,7 +48,7 @@ export const ChatList = ({ items, containerClassName, addChat }) => {
                 name='chatName'
                 type='text'
                 value={chatName}
-                onChange={({target}) => setChatName(target.value)}
+                onChange={setChatName}
                 autoComplete='off'
                 size='small'
               />

@@ -10,18 +10,13 @@ import SendIcon from "@material-ui/icons/Send";
 import MessageIcon from '@material-ui/icons/Message';
 import EditIcon from '@material-ui/icons/Edit';
 import Fab from "@material-ui/core/Fab";
+import {useInput} from "../../hooks/useInput";
 
 const cx = classnames.bind(styles);
 
-const useInput = (initialState) => {
-  const [state, setState] = useState(initialState);
-  const setInput = ({ currentTarget: { value }}) => setState(value);
-  return [state, setInput];
-};
-
 export const MessageForm = ({ addMessage }) => {
   const [name, setName] = useInput('');
-  const [content, setContent] = useInput('');
+  const [content, setContent, clearInput] = useInput('');
   const [nameSaved, setNameSaved] = useState(false);
 
   const messageField = useRef();
@@ -34,7 +29,7 @@ export const MessageForm = ({ addMessage }) => {
     e.preventDefault();
     if(name && content && isFunction(addMessage)) {
       addMessage({ name, content });
-      setContent({ currentTarget: { value: '' } });
+      clearInput();
       setNameSaved(true);
       messageField.current.focus();
     }
