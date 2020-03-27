@@ -53,10 +53,10 @@ export const MessageForm = ({ addMessage }) => {
             </div>
           ) : (
             <TextField
+              type='text'
               label='Имя'
               variant='outlined'
               name='name'
-              type='text'
               value={name}
               onChange={setName}
               autoComplete='off'
@@ -77,6 +77,7 @@ export const MessageForm = ({ addMessage }) => {
       </Box>
       <Box my={2} className={cx('message-line')}>
         <TextField
+          type='text'
           className={cx('message')}
           label='Сообщение'
           variant='outlined'

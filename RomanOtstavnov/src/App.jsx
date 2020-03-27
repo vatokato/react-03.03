@@ -1,13 +1,14 @@
 import styles from './app.scss';
 import classnames from 'classnames/bind';
 import React from 'react';
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-import {initStore} from "../store";
-import {initChats, loadData} from "../store/chatActions";
-import {init as initProfile} from "../store/profileActions";
+import {Switch, Route} from "react-router-dom";
+import {initStore, history} from "./store";
+import {initChats} from "./store/chatActions";
+import {init as initProfile} from "./store/profileActions";
 import {Provider} from "react-redux";
 import HeaderContainer from "./containers/HeaderContainer";
 import ChatContainer from "./containers/ChatContainer";
+import {ConnectedRouter} from "connected-react-router";
 
 const cx = classnames.bind(styles);
 
@@ -15,24 +16,19 @@ const store = initStore();
 store.dispatch(initChats());
 store.dispatch(initProfile({name: 'Roman Ot', city: 'Ekaterinburg'}));
 
-fetch('https://raw.githubusercontent.com/vatokato/react-03.03/master/RomanOtstavnov/data/messages.json')
-  .then(result => result.json())
-  .then(chats => store.dispatch(loadData(chats)))
-  .catch(err => console.error(err));
-
 export const App = () => (
   <Provider store={store}>
     <div className={cx('wrapper')}>
-      <BrowserRouter>
+      <ConnectedRouter history={history}>
         <HeaderContainer />
         <Switch>
-            <Route path="/" exact>It's index page</Route>
-            <Route path="/chats" exact component={ChatContainer} />
-            <Route path="/chats/:id" component={ChatContainer} />
-            <Route path="/profile">It's profile page</Route>
-            <Route path="/">It's 404 page. Not found.</Route>
+          <Route path="/" exact>It's index page</Route>
+          <Route path="/chats" exact component={ChatContainer} />
+          <Route path="/chats/:id" component={ChatContainer} />
+          <Route path="/profile">It's profile page</Route>
+          <Route path="/">It's 404 page. Not found.</Route>
         </Switch>
-      </BrowserRouter>
+      </ConnectedRouter>
     </div>
   </Provider>
 );

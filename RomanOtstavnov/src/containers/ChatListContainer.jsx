@@ -1,33 +1,23 @@
 import React from 'react';
-import get from 'lodash/get';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {addChat} from "../../store/chatActions";
+import {addChat, changeChat} from "../store/chatActions";
 import ChatList from "../components/ChatList/ChatList";
 
-const mapStateToProps = ({chat}, props) => {
-  const {chats: items = []} = chat;
+const mapStateToProps = ({chat, router}, props) => {
+  const { chats: items = [] } = chat;
+  const { chatId: activeChatId } = router.location.state || {};
+
   return {
     ...props,
-    chatId: parseInt(get(props, 'match.params.id', 0)),
+    activeChatId,
     items,
   }
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  addChat,
+  addChat: name => addChat(Date.now(), name),
+  changeChat: id => changeChat(id),
 }, dispatch);
 
-const mergeProps = ({
-  chatId, items,
-}, {
-  addChat: addChatDispatch,
-}) => {
-
-  return {
-    items,
-    chatId: items.some(item => item.id === chatId) ? chatId : false,
-    addChat: ({name}) => addChatDispatch(name),
-  }
-};
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(ChatList);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatList);

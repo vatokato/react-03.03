@@ -28,13 +28,11 @@ export default handleActions({
         };
     },
     [addChat]: (store, action) => {
-        const {name} = action.payload;
+        const {name, id} = action.payload;
         return {
             ...store,
             chats: [...store.chats, {
-                id: Array.isArray(store.chats) && store.chats[store.chats.length-1]
-                  ? store.chats[store.chats.length-1].id + 1
-                  : 1,
+                id,
                 name,
                 messages: [],
             }]

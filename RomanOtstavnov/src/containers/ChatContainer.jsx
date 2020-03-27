@@ -4,7 +4,7 @@ import {MESSAGE_TYPE} from "../constants";
 import get from 'lodash/get';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {addMessage} from "../../store/chatActions";
+import {addMessage} from "../store/chatActions";
 import Chat from '../components/Chat/Chat';
 
 const bot = new Bot();
@@ -32,14 +32,6 @@ const mergeProps = ({
 
   const addMessage = ({name, content}) => {
     addMessageDispatch(activeChatId, name, content);
-    bot.getAnswer({ name, message: content })
-      .then(answer => addMessageDispatch(
-        activeChatId,
-        bot.name,
-        answer,
-        MESSAGE_TYPE.ai
-      ))
-      .catch(error => console.error(error));
   };
 
   return {

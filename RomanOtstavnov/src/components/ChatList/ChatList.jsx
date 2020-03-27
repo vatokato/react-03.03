@@ -11,13 +11,19 @@ import {useInput} from "../../hooks/useInput";
 
 const cx = classnames.bind(styles);
 
-export const ChatList = ({ items, containerClassName, addChat }) => {
+export const ChatList = ({
+                           activeChatId,
+                           items,
+                           containerClassName,
+                           addChat,
+                           changeChat,
+                         }) => {
   const [chatName, setChatName, clearChatName] = useInput('');
 
   const sendForm = (e) => {
     e.preventDefault();
     if(chatName){
-      isFunction(addChat) && addChat({ name: chatName });
+      isFunction(addChat) && addChat(chatName);
       clearChatName();
     }
   };
@@ -27,14 +33,15 @@ export const ChatList = ({ items, containerClassName, addChat }) => {
       <Box py={1} px={2} className={cx('container', containerClassName)}>
         <List>
           {items.map(({name, id}, index) => (
-            <ListItem key={index}>
-              <NavLink
-                to={`/chats/${id}`} exact
-                activeClassName={cx('active')}
-                className={cx('link')}
-              >
-                {name}
-              </NavLink>
+            <ListItem
+              key={index}
+              onClick={() => changeChat(id)}
+              className={cx(
+                'link',
+                {'active': id === activeChatId}
+              )}
+            >
+              {name}
             </ListItem>
           ))}
           <ListItem>
