@@ -7,12 +7,10 @@ import {connect} from "react-redux";
 import {addMessage} from "../store/chatActions";
 import Chat from '../components/Chat/Chat';
 
-const bot = new Bot();
-
 const mapStateToProps = ({ chat }, props) => {
-  const { chats = [] } = chat;
+  const { items = [] } = chat;
   const activeChatId =  parseInt(get(props, 'match.params.id', 0));
-  const activeChat = chats.find(item => item.id === activeChatId);
+  const activeChat = items.find(item => item.id === activeChatId);
   return {
     activeChatId,
     messages: activeChat && activeChat.messages || [],

@@ -5,13 +5,14 @@ import {addChat, changeChat} from "../store/chatActions";
 import ChatList from "../components/ChatList/ChatList";
 
 const mapStateToProps = ({chat, router}, props) => {
-  const { chats: items = [] } = chat;
+  const { items = [], isLoaded } = chat;
   const { chatId: activeChatId } = router.location.state || {};
 
   return {
     ...props,
     activeChatId,
     items,
+    isLoaded,
   }
 };
 
