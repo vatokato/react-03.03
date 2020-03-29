@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 
 const cx = classnames.bind(styles);
 
-const Header = ({ name }) => {
+const Header = ({ name, avatar_url }) => {
   return (
     <AppBar position="static" className={cx('container')}>
       <Toolbar>
@@ -21,7 +21,8 @@ const Header = ({ name }) => {
           <NavLink to="/chats" activeClassName={cx('active')} className={cx('link')}>Chats</NavLink>
           <NavLink to="/profile" activeClassName={cx('active')} className={cx('link')}>Profile</NavLink>
         </Box>
-        <Typography variant='h6'>
+        <Typography variant='h6' className={cx('user')}>
+          <img src={avatar_url} alt="avatar"/>
           {name}
         </Typography>
       </Toolbar>

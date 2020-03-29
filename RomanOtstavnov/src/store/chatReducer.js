@@ -16,21 +16,18 @@ export default handleActions({
         };
     },
     [failure]: (store, action) => {
-        console.log(action);
+        console.error(action.payload);
         return {
             ...store,
             isLoaded: false,
-            error: action.payload.error,
+            error: action.payload,
         };
     },
-    [success]: (store, action) => {
-        const {items} = action.payload;
-        return {
-            ...store,
-            items: [...store.items, ...items],
-            isLoaded: false,
-        };
-    },
+    [success]: (store, action) => ({
+        ...store,
+        items: [...store.items, ...action.payload],
+        isLoaded: false,
+    }),
     [addMessage]: (store, action) => {
         const {chatId, name, content, type} = action.payload;
         return {

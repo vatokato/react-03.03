@@ -1,11 +1,44 @@
 import { handleActions } from 'redux-actions';
-import { init } from './profileActions';
+import {
+    profileInit,
+    profileRequest,
+    profileSuccess,
+    profileFailure
+} from './profileActions';
 
-const initialState = {};
+const initialState = {
+    userName: null,
+    isLoaded: false,
+    error: null,
+};
 
 export default handleActions({
-    [init]: (store, action) => {
-        const { name, city } = action.payload;
-        return {name, city };
+    [profileInit]: (store, action) => {
+        const { userName } = action.payload;
+        return {
+            ...store,
+            userName,
+            isLoaded: false,
+        };
+    },
+    [profileRequest]: (store, action) => {
+        return {
+            ...store,
+            isLoaded: true,
+        };
+    },
+    [profileSuccess]: (store, action) => {
+        return {
+            ...store,
+            ...action.payload,
+            isLoaded: false,
+        };
+    },
+    [profileFailure]: (store, action) => {
+        return {
+            ...store,
+            ...action.payload,
+            isLoaded: false,
+        };
     },
 }, initialState)

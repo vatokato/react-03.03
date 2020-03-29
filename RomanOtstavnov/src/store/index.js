@@ -3,9 +3,11 @@ import chatReducer from './chatReducer';
 import profileReducer from "./profileReducer";
 import ReduxThunk from "redux-thunk";
 import {connectRouter, routerMiddleware} from "connected-react-router";
-import chatMiddleware from "./chatMiddleware";
 import {createBrowserHistory} from "history";
+import chatMiddleware from "./chatMiddleware";
 import botMiddleware from "./botMiddleware";
+import profileMiddleware from "./profileMiddleware";
+import {apiMiddleware} from "redux-api-middleware";
 
 export const history = createBrowserHistory();
 
@@ -23,9 +25,11 @@ export function initStore (preloadedState = undefined) {
       preloadedState,
       composeEnhancers(applyMiddleware(
         ReduxThunk,
+        apiMiddleware,
         routerMiddleware(history),
         botMiddleware,
-        chatMiddleware
+        chatMiddleware,
+        profileMiddleware
       ))
     )
 }

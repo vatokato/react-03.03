@@ -18,7 +18,7 @@ const mapStateToProps = ({chat, router}, props) => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   addChat: name => addChat(Date.now(), name),
-  changeChat: id => changeChat(id),
+  changeChat,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatList);

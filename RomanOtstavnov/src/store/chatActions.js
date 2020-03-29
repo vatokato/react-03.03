@@ -12,8 +12,8 @@ export const {
     unFire,
 } = createActions({
     REQUEST: () => ({}),
-    SUCCESS: items => ({items}),
-    failure: error => ({error}),
+    SUCCESS: () => (items) => ({items}),
+    FAILURE: error => ({error}),
     INIT_CHATS: () => ({}),
     ADD_MESSAGE: (chatId, name, content, type) => ({chatId, name, content, type}),
     ADD_CHAT: (id, name) => ({id, name}),

@@ -1,6 +1,4 @@
 import React from 'react';
-import Bot from '../bots/aiprojectBot';
-import {MESSAGE_TYPE} from "../constants";
 import get from 'lodash/get';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
@@ -25,17 +23,12 @@ const mergeProps = ({
   activeChatId,
   messages,
 }, {
-  addMessage: addMessageDispatch,
+  addMessage,
 }) => {
-
-  const addMessage = ({name, content}) => {
-    addMessageDispatch(activeChatId, name, content);
-  };
-
   return {
     activeChatId,
     messages,
-    addMessage,
+    addMessage: ({name, content}) => addMessage(activeChatId, name, content),
   }
 };
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Chat);
